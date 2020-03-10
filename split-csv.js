@@ -3,6 +3,7 @@ const input = document.querySelector('#split-csv')
 input.addEventListener('change', event => {
   const file = event.target.files[0]
   const reader = new FileReader()
+
   reader.onload = e => {
     const re = /[\u{4e00}-\u{9fa5}]/u
 
@@ -13,8 +14,10 @@ input.addEventListener('change', event => {
     }).join('\r\n')
 
     const csvContent = 'data:text/csv;charset=utf-8,' + t
-    const encodedUri = encodeURI(csvContent)
-    window.open(encodedUri)
+    const a = document.querySelector('#result-csv')
+    a.href = csvContent
+    a.click()
   }
+
   reader.readAsText(file)
 })
